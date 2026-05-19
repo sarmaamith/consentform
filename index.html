@@ -581,6 +581,245 @@
 
     </script>
 
+<script>
+
+(function () {
+
+    // ============================================================
+    // CONFIGURATION
+    // ============================================================
+
+    const SECURITI_ENDPOINT =
+        'https://app.securiti.ai/privaci/v1/consentapi/consent_upload';
+
+    const SECURITI_HEADERS = {
+
+        'X-API-Key':
+            'GYsPcqTmOKEXcXq7M15ElbXOsga80rk0W367rmk9',
+
+        'X-API-Secret':
+            '85fzFjPye5XzO8yjXLsa9bP0Ol3zcPjl5Yd17bXM',
+
+        'X-TIDENT':
+            '09f99b07-9b72-4dd3-b6b5-1009a96c2fd4',
+
+        'Content-Type':
+            'application/json'
+    };
+
+    // ============================================================
+    // PREVENT DUPLICATE CALLS
+    // ============================================================
+
+    let consentInFlight = false;
+
+    // ============================================================
+    // TARGET FORM
+    // ============================================================
+
+    const consentForm =
+        document.getElementById('getInTouchForm');
+
+    if (!consentForm) {
+
+        console.error(
+            'Consent form not found'
+        );
+
+        return;
+    }
+
+    // ============================================================
+    // CONSENT CAPTURE
+    // ============================================================
+
+    consentForm.addEventListener(
+        'submit',
+        async function () {
+
+            if (consentInFlight) return;
+
+            consentInFlight = true;
+
+            try {
+
+                // ============================================================
+                // FIELD VALUES
+                // ============================================================
+
+                const name =
+                    consentForm.name?.value || '';
+
+                const email =
+                    consentForm.email?.value || '';
+
+                const country =
+                    consentForm.country?.value || '';
+
+                const city =
+                    consentForm.city?.value || '';
+
+                const mobile =
+                    consentForm.mobile?.value || '';
+
+                const consentGranted =
+                    consentForm.querySelector(
+                        '.consent-line input[type="checkbox"]'
+                    )?.checked || false;
+
+                // ============================================================
+                // PAYLOAD
+                // ============================================================
+
+                const payload = {
+
+                    UUID:
+                        email ||
+                        mobile ||
+                        ('anonymous_' + Date.now()),
+
+                    uuids: {
+
+                        email:
+                            email,
+
+                        phone:
+                            mobile
+                    },
+
+                    activity_timestamp:
+                        Math.floor(Date.now() / 1000),
+
+                    consent_source:
+                        'Godrej Properties - Get In Touch',
+
+                    metadata: {
+
+                        name:
+                            name,
+
+                        city:
+                            city,
+
+                        country:
+                            country,
+
+                        page_url:
+                            window.location.href,
+
+                        page_title:
+                            document.title,
+
+                        user_agent:
+                            navigator.userAgent
+                    },
+
+                    consent_info: [
+
+                        {
+
+                            processing_purpose_name:
+                                'Marketing Communication',
+
+                            consented_items: [
+
+                                {
+
+                                    consent_purpose_name:
+                                        'SMS',
+
+                                    consent_granted:
+                                        consentGranted
+                                },
+
+                                {
+
+                                    consent_purpose_name:
+                                        'Email',
+
+                                    consent_granted:
+                                        consentGranted
+                                },
+
+                                {
+
+                                    consent_purpose_name:
+                                        'Phone Call',
+
+                                    consent_granted:
+                                        consentGranted
+                                }
+                            ]
+                        }
+                    ]
+                };
+
+                console.log(
+                    'Consent Payload:',
+                    payload
+                );
+
+                // ============================================================
+                // API CALL
+                // ============================================================
+
+                const response =
+                    await fetch(
+                        SECURITI_ENDPOINT,
+                        {
+
+                            method: 'POST',
+
+                            headers:
+                                SECURITI_HEADERS,
+
+                            body:
+                                JSON.stringify(payload)
+                        }
+                    );
+
+                if (response.ok) {
+
+                    const result =
+                        await response.json();
+
+                    console.log(
+                        'Consent Uploaded:',
+                        result
+                    );
+                }
+
+                else {
+
+                    const errorText =
+                        await response.text();
+
+                    console.error(
+                        'Consent Upload Failed:',
+                        errorText
+                    );
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    'Consent Network Error:',
+                    error
+                );
+            }
+
+            finally {
+
+                consentInFlight = false;
+            }
+        }
+    );
+
+})();
+
+</script>
 </body>
 
 </html>
