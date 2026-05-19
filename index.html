@@ -675,17 +675,13 @@
 
                     UUID:
                         email ||
-                        mobile ||
-                        ('anonymous_' + Date.now()),
+                         ('anonymous_' + Date.now()),
 
                     uuids: {
 
                         email:
                             email,
-
-                        phone:
-                            mobile
-                    },
+                     },
 
                     activity_timestamp:
                         Math.floor(Date.now() / 1000),
