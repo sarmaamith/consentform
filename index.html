@@ -1,125 +1,457 @@
-<form id="getInTouchForm">
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="modal-grid">
+<head>
 
-        <div class="field-group">
+    <meta charset="UTF-8">
 
-            <label>Name</label>
-
-            <input
-                type="text"
-                name="name"
-            >
-
-        </div>
-
-        <div class="field-group">
-
-            <label>Email</label>
-
-            <input
-                type="email"
-                name="email"
-            >
-
-        </div>
-
-        <div class="field-group">
-
-            <label>Country</label>
-
-            <select name="country">
-
-                <option value="">
-                    Select Country
-                </option>
-
-                <option>
-                    India
-                </option>
-
-                <option>
-                    USA
-                </option>
-
-                <option>
-                    UAE
-                </option>
-
-                <option>
-                    Singapore
-                </option>
-
-            </select>
-
-        </div>
-
-        <div class="field-group">
-
-            <label>City</label>
-
-            <input
-                type="text"
-                name="city"
-            >
-
-        </div>
-
-        <div class="field-group full-width">
-
-            <label>Mobile</label>
-
-            <input
-                type="tel"
-                name="mobile"
-            >
-
-        </div>
-
-    </div>
-
-    <!-- ============================================================
-         CONSENT CHECKBOX
-    ============================================================ -->
-
-    <div class="consent-line">
-
-        <input
-            type="checkbox"
-            checked
-        >
-
-        <span>
-            Yes, I would like to receive updates &
-            promotions from Godrej Properties Limited.
-        </span>
-
-    </div>
-
-    <!-- ============================================================
-         SUBMIT BUTTON
-    ============================================================ -->
-
-    <div class="submit-container">
-
-        <button
-            type="submit"
-            class="submit-btn"
-        >
-            Submit
-        </button>
-
-    </div>
-
-    <!-- ============================================================
-         SUCCESS MESSAGE
-    ============================================================ -->
-
-    <div
-        id="successMessage"
-        class="success-message"
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
     >
-        Form submitted successfully.
+
+    <title>Get In Touch</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+
+            background: #f4f4f4;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 100vh;
+
+            padding: 20px;
+        }
+
+        /* ============================================================
+           FORM CONTAINER
+        ============================================================ */
+
+        .form-container {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            border-radius: 8px;
+
+            padding: 60px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* ============================================================
+           TITLE
+        ============================================================ */
+
+        h1 {
+
+            text-align: center;
+
+            font-size: 56px;
+
+            color: #222;
+
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 24px;
+
+            margin-bottom: 50px;
+        }
+
+        /* ============================================================
+           GRID
+        ============================================================ */
+
+        .modal-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 40px 60px;
+        }
+
+        .field-group {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .field-group label {
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            margin-bottom: 10px;
+
+            color: #222;
+        }
+
+        .field-group input,
+        .field-group select {
+
+            border: none;
+
+            border-bottom: 2px solid #444;
+
+            padding: 14px 8px;
+
+            font-size: 18px;
+
+            outline: none;
+
+            background: transparent;
+        }
+
+        .field-group input:focus,
+        .field-group select:focus {
+
+            border-color: #0056b3;
+        }
+
+        .full-width {
+
+            grid-column: span 2;
+        }
+
+        /* ============================================================
+           CONSENT
+        ============================================================ */
+
+        .consent-line {
+
+            margin-top: 40px;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 12px;
+
+            font-size: 18px;
+
+            line-height: 1.5;
+        }
+
+        .consent-line input {
+
+            width: 22px;
+
+            height: 22px;
+
+            margin-top: 4px;
+        }
+
+        /* ============================================================
+           SUBMIT
+        ============================================================ */
+
+        .submit-container {
+
+            margin-top: 50px;
+
+            display: flex;
+
+            justify-content: center;
+        }
+
+        .submit-btn {
+
+            width: 320px;
+
+            height: 70px;
+
+            background: white;
+
+            border: 2px solid #222;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+
+            background: #111;
+
+            color: white;
+        }
+
+        /* ============================================================
+           SUCCESS MESSAGE
+        ============================================================ */
+
+        .success-message {
+
+            text-align: center;
+
+            color: green;
+
+            font-size: 20px;
+
+            margin-top: 20px;
+
+            display: none;
+        }
+
+        /* ============================================================
+           MOBILE
+        ============================================================ */
+
+        @media(max-width: 768px) {
+
+            .form-container {
+
+                padding: 30px;
+            }
+
+            .modal-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+
+                grid-column: span 1;
+            }
+
+            h1 {
+
+                font-size: 38px;
+            }
+
+            .subtitle {
+
+                font-size: 18px;
+            }
+
+            .submit-btn {
+
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h1>Get in touch</h1>
+
+        <p class="subtitle">
+            Fill in the following details and we will get back to you shortly.
+        </p>
+
+        <!-- ============================================================
+             FORM
+        ============================================================ -->
+
+        <form id="getInTouchForm">
+
+            <div class="modal-grid">
+
+                <div class="field-group">
+
+                    <label>Name</label>
+
+                    <input
+                        type="text"
+                        name="name"
+                    >
+
+                </div>
+
+                <div class="field-group">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        name="email"
+                    >
+
+                </div>
+
+                <div class="field-group">
+
+                    <label>Country</label>
+
+                    <select name="country">
+
+                        <option value="">
+                            Select Country
+                        </option>
+
+                        <option>
+                            India
+                        </option>
+
+                        <option>
+                            USA
+                        </option>
+
+                        <option>
+                            UAE
+                        </option>
+
+                        <option>
+                            Singapore
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="field-group">
+
+                    <label>City</label>
+
+                    <input
+                        type="text"
+                        name="city"
+                    >
+
+                </div>
+
+                <div class="field-group full-width">
+
+                    <label>Mobile</label>
+
+                    <input
+                        type="tel"
+                        name="mobile"
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- ============================================================
+                 CONSENT CHECKBOX
+            ============================================================ -->
+
+            <div class="consent-line">
+
+                <input
+                    type="checkbox"
+                    checked
+                >
+
+                <span>
+                    Yes, I would like to receive updates &
+                    promotions from Godrej Properties Limited.
+                </span>
+
+            </div>
+
+            <!-- ============================================================
+                 SUBMIT BUTTON
+            ============================================================ -->
+
+            <div class="submit-container">
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    Submit
+                </button>
+
+            </div>
+
+            <!-- ============================================================
+                 SUCCESS MESSAGE
+            ============================================================ -->
+
+            <div
+                id="successMessage"
+                class="success-message"
+            >
+                Form submitted successfully.
+            </div>
+
+        </form>
+
     </div>
 
-</form>
+    <!-- ============================================================
+         SCRIPT
+    ============================================================ -->
+
+    <script>
+
+        const form =
+            document.getElementById('getInTouchForm');
+
+        const successMessage =
+            document.getElementById('successMessage');
+
+        form.addEventListener('submit', function (e) {
+
+            e.preventDefault();
+
+            successMessage.style.display = 'block';
+
+            console.log({
+
+                name:
+                    form.name.value || '',
+
+                email:
+                    form.email.value || '',
+
+                country:
+                    form.country.value || '',
+
+                city:
+                    form.city.value || '',
+
+                mobile:
+                    form.mobile.value || ''
+            });
+
+            setTimeout(function () {
+
+                successMessage.style.display = 'none';
+
+                form.reset();
+
+            }, 2000);
+        });
+
+    </script>
+
+</body>
+
+</html>
