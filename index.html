@@ -1,586 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
+<form id="getInTouchForm">
 
-<head>
+    <div class="modal-grid">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div class="field-group">
 
-    <title>Get In Touch</title>
+            <label>Name</label>
 
-    <style>
+            <input
+                type="text"
+                name="name"
+            >
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+        </div>
 
-        body {
+        <div class="field-group">
 
-            background: #f4f4f4;
+            <label>Email</label>
 
-            display: flex;
+            <input
+                type="email"
+                name="email"
+            >
 
-            justify-content: center;
+        </div>
 
-            align-items: center;
+        <div class="field-group">
 
-            min-height: 100vh;
-        }
+            <label>Country</label>
 
-        /* ============================================================
-           OPEN BUTTON
-        ============================================================ */
+            <select name="country">
 
-        .open-modal-btn {
+                <option value="">
+                    Select Country
+                </option>
 
-            background: #111;
+                <option>
+                    India
+                </option>
 
-            color: white;
+                <option>
+                    USA
+                </option>
 
-            border: none;
+                <option>
+                    UAE
+                </option>
 
-            padding: 16px 34px;
+                <option>
+                    Singapore
+                </option>
 
-            font-size: 20px;
+            </select>
 
-            border-radius: 4px;
+        </div>
 
-            cursor: pointer;
+        <div class="field-group">
 
-            transition: 0.3s;
-        }
+            <label>City</label>
 
-        .open-modal-btn:hover {
+            <input
+                type="text"
+                name="city"
+            >
 
-            background: #333;
-        }
+        </div>
 
-        /* ============================================================
-           MODAL
-        ============================================================ */
+        <div class="field-group full-width">
 
-        .modal-overlay {
+            <label>Mobile</label>
 
-            position: fixed;
-
-            inset: 0;
-
-            background: rgba(0, 0, 0, 0.55);
-
-            display: none;
-
-            justify-content: center;
-
-            align-items: center;
-
-            z-index: 9999;
-        }
-
-        .modal-container {
-
-            background: white;
-
-            width: 92%;
-
-            max-width: 1100px;
-
-            border-radius: 8px;
-
-            padding: 60px;
-
-            position: relative;
-
-            animation: modalFade 0.3s ease;
-        }
-
-        @keyframes modalFade {
-
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close-modal {
-
-            position: absolute;
-
-            top: 20px;
-
-            right: 30px;
-
-            font-size: 48px;
-
-            cursor: pointer;
-
-            color: #222;
-        }
-
-        .modal-container h1 {
-
-            text-align: center;
-
-            font-size: 56px;
-
-            margin-bottom: 15px;
-
-            color: #222;
-        }
-
-        .modal-subtitle {
-
-            text-align: center;
-
-            color: #666;
-
-            font-size: 24px;
-
-            margin-bottom: 50px;
-        }
-
-        /* ============================================================
-           FORM GRID
-        ============================================================ */
-
-        .modal-grid {
-
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 40px 60px;
-        }
-
-        .field-group {
-
-            display: flex;
-
-            flex-direction: column;
-        }
-
-        .field-group label {
-
-            font-size: 18px;
-
-            font-weight: 600;
-
-            margin-bottom: 10px;
-
-            color: #222;
-        }
-
-        .field-group input,
-        .field-group select {
-
-            border: none;
-
-            border-bottom: 2px solid #444;
-
-            padding: 14px 8px;
-
-            font-size: 18px;
-
-            outline: none;
-
-            background: transparent;
-        }
-
-        .field-group input:focus,
-        .field-group select:focus {
-
-            border-color: #0056b3;
-        }
-
-        .full-width {
-
-            grid-column: span 2;
-        }
-
-        /* ============================================================
-           CONSENT
-        ============================================================ */
-
-        .consent-line {
-
-            margin-top: 40px;
-
-            display: flex;
-
-            align-items: flex-start;
-
-            gap: 12px;
-
-            font-size: 18px;
-
-            line-height: 1.5;
-        }
-
-        .consent-line input {
-
-            width: 22px;
-
-            height: 22px;
-
-            margin-top: 4px;
-        }
-
-        /* ============================================================
-           SUBMIT
-        ============================================================ */
-
-        .submit-container {
-
-            margin-top: 50px;
-
-            display: flex;
-
-            justify-content: center;
-        }
-
-        .submit-btn {
-
-            width: 320px;
-
-            height: 70px;
-
-            background: white;
-
-            border: 2px solid #222;
-
-            font-size: 28px;
-
-            cursor: pointer;
-
-            transition: 0.3s;
-        }
-
-        .submit-btn:hover {
-
-            background: #111;
-
-            color: white;
-        }
-
-        /* ============================================================
-           SUCCESS MESSAGE
-        ============================================================ */
-
-        .success-message {
-
-            text-align: center;
-
-            color: green;
-
-            font-size: 20px;
-
-            margin-top: 20px;
-
-            display: none;
-        }
-
-        /* ============================================================
-           MOBILE
-        ============================================================ */
-
-        @media(max-width: 768px) {
-
-            .modal-container {
-
-                padding: 30px;
-            }
-
-            .modal-grid {
-
-                grid-template-columns: 1fr;
-            }
-
-            .full-width {
-
-                grid-column: span 1;
-            }
-
-            .modal-container h1 {
-
-                font-size: 38px;
-            }
-
-            .modal-subtitle {
-
-                font-size: 18px;
-            }
-
-            .submit-btn {
-
-                width: 100%;
-            }
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-    <!-- ============================================================
-         OPEN BUTTON
-    ============================================================ -->
-
-    <button id="openModalBtn" class="open-modal-btn">
-        Get In Touch
-    </button>
-
-    <!-- ============================================================
-         MODAL
-    ============================================================ -->
-
-    <div id="getInTouchModal" class="modal-overlay">
-
-        <div class="modal-container">
-
-            <span class="close-modal">&times;</span>
-
-            <h1>Get in touch</h1>
-
-            <p class="modal-subtitle">
-                Fill in the following details and we will get back to you shortly.
-            </p>
-
-            <!-- ============================================================
-                 FORM
-            ============================================================ -->
-
-            <form id="getInTouchForm">
-
-                <div class="modal-grid">
-
-                    <div class="field-group">
-
-                        <label>Name*</label>
-
-                        <input
-                            type="text"
-                            name="name"
-                            required
-                        >
-                    </div>
-
-                    <div class="field-group">
-
-                        <label>Email*</label>
-
-                        <input
-                            type="email"
-                            name="email"
-                            required
-                        >
-                    </div>
-
-                    <div class="field-group">
-
-                        <label>Country*</label>
-
-                        <select
-                            name="country"
-                            required
-                        >
-                            <option value="">
-                                Select Country
-                            </option>
-
-                            <option>
-                                India
-                            </option>
-
-                            <option>
-                                USA
-                            </option>
-
-                            <option>
-                                UAE
-                            </option>
-
-                            <option>
-                                Singapore
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="field-group">
-
-                        <label>City*</label>
-
-                        <input
-                            type="text"
-                            name="city"
-                            required
-                        >
-                    </div>
-
-                    <div class="field-group full-width">
-
-                        <label>Mobile*</label>
-
-                        <input
-                            type="tel"
-                            name="mobile"
-                            required
-                        >
-                    </div>
-
-                </div>
-
-                <!-- ============================================================
-                     CONSENT CHECKBOX
-                ============================================================ -->
-
-                <div class="consent-line">
-
-                    <input
-                        type="checkbox"
-                        checked
-                    >
-
-                    <span>
-                        Yes, I would like to receive updates &
-                        promotions from Godrej Properties Limited.
-                    </span>
-
-                </div>
-
-                <!-- ============================================================
-                     SUBMIT BUTTON
-                ============================================================ -->
-
-                <div class="submit-container">
-
-                    <button
-                        type="submit"
-                        class="submit-btn"
-                    >
-                        Submit
-                    </button>
-
-                </div>
-
-                <!-- ============================================================
-                     SUCCESS MESSAGE
-                ============================================================ -->
-
-                <div
-                    id="successMessage"
-                    class="success-message"
-                >
-                    Form submitted successfully.
-                </div>
-
-            </form>
+            <input
+                type="tel"
+                name="mobile"
+            >
 
         </div>
 
     </div>
 
     <!-- ============================================================
-         SCRIPT
+         CONSENT CHECKBOX
     ============================================================ -->
 
-    <script>
+    <div class="consent-line">
 
-        const modal =
-            document.getElementById('getInTouchModal');
+        <input
+            type="checkbox"
+            checked
+        >
 
-        const openBtn =
-            document.getElementById('openModalBtn');
+        <span>
+            Yes, I would like to receive updates &
+            promotions from Godrej Properties Limited.
+        </span>
 
-        const closeBtn =
-            document.querySelector('.close-modal');
+    </div>
 
-        const form =
-            document.getElementById('getInTouchForm');
+    <!-- ============================================================
+         SUBMIT BUTTON
+    ============================================================ -->
 
-        const successMessage =
-            document.getElementById('successMessage');
+    <div class="submit-container">
 
-        // ============================================================
-        // OPEN MODAL
-        // ============================================================
+        <button
+            type="submit"
+            class="submit-btn"
+        >
+            Submit
+        </button>
 
-        openBtn.addEventListener('click', function () {
+    </div>
 
-            modal.style.display = 'flex';
-        });
+    <!-- ============================================================
+         SUCCESS MESSAGE
+    ============================================================ -->
 
-        // ============================================================
-        // CLOSE MODAL
-        // ============================================================
+    <div
+        id="successMessage"
+        class="success-message"
+    >
+        Form submitted successfully.
+    </div>
 
-        closeBtn.addEventListener('click', function () {
-
-            modal.style.display = 'none';
-        });
-
-        // ============================================================
-        // CLOSE ON OUTSIDE CLICK
-        // ============================================================
-
-        window.addEventListener('click', function (e) {
-
-            if (e.target === modal) {
-
-                modal.style.display = 'none';
-            }
-        });
-
-        // ============================================================
-        // FORM SUBMIT
-        // ============================================================
-
-        form.addEventListener('submit', function (e) {
-
-            e.preventDefault();
-
-            successMessage.style.display = 'block';
-
-            console.log({
-
-                name:
-                    form.name.value,
-
-                email:
-                    form.email.value,
-
-                country:
-                    form.country.value,
-
-                city:
-                    form.city.value,
-
-                mobile:
-                    form.mobile.value
-            });
-
-            setTimeout(function () {
-
-                successMessage.style.display = 'none';
-
-                modal.style.display = 'none';
-
-                form.reset();
-
-            }, 2000);
-        });
-
-    </script>
-
-</body>
-
-</html>
+</form>
