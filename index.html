@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Get In Touch</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+
+            background: #f4f4f4;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 100vh;
+        }
+
+        /* ============================================================
+           OPEN BUTTON
+        ============================================================ */
+
+        .open-modal-btn {
+
+            background: #111;
+
+            color: white;
+
+            border: none;
+
+            padding: 16px 34px;
+
+            font-size: 20px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .open-modal-btn:hover {
+
+            background: #333;
+        }
+
+        /* ============================================================
+           MODAL
+        ============================================================ */
+
+        .modal-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.55);
+
+            display: none;
+
+            justify-content: center;
+
+            align-items: center;
+
+            z-index: 9999;
+        }
+
+        .modal-container {
+
+            background: white;
+
+            width: 92%;
+
+            max-width: 1100px;
+
+            border-radius: 8px;
+
+            padding: 60px;
+
+            position: relative;
+
+            animation: modalFade 0.3s ease;
+        }
+
+        @keyframes modalFade {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+
+            position: absolute;
+
+            top: 20px;
+
+            right: 30px;
+
+            font-size: 48px;
+
+            cursor: pointer;
+
+            color: #222;
+        }
+
+        .modal-container h1 {
+
+            text-align: center;
+
+            font-size: 56px;
+
+            margin-bottom: 15px;
+
+            color: #222;
+        }
+
+        .modal-subtitle {
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 24px;
+
+            margin-bottom: 50px;
+        }
+
+        /* ============================================================
+           FORM GRID
+        ============================================================ */
+
+        .modal-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 40px 60px;
+        }
+
+        .field-group {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .field-group label {
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            margin-bottom: 10px;
+
+            color: #222;
+        }
+
+        .field-group input,
+        .field-group select {
+
+            border: none;
+
+            border-bottom: 2px solid #444;
+
+            padding: 14px 8px;
+
+            font-size: 18px;
+
+            outline: none;
+
+            background: transparent;
+        }
+
+        .field-group input:focus,
+        .field-group select:focus {
+
+            border-color: #0056b3;
+        }
+
+        .full-width {
+
+            grid-column: span 2;
+        }
+
+        /* ============================================================
+           CONSENT
+        ============================================================ */
+
+        .consent-line {
+
+            margin-top: 40px;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 12px;
+
+            font-size: 18px;
+
+            line-height: 1.5;
+        }
+
+        .consent-line input {
+
+            width: 22px;
+
+            height: 22px;
+
+            margin-top: 4px;
+        }
+
+        /* ============================================================
+           SUBMIT
+        ============================================================ */
+
+        .submit-container {
+
+            margin-top: 50px;
+
+            display: flex;
+
+            justify-content: center;
+        }
+
+        .submit-btn {
+
+            width: 320px;
+
+            height: 70px;
+
+            background: white;
+
+            border: 2px solid #222;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+
+            background: #111;
+
+            color: white;
+        }
+
+        /* ============================================================
+           SUCCESS MESSAGE
+        ============================================================ */
+
+        .success-message {
+
+            text-align: center;
+
+            color: green;
+
+            font-size: 20px;
+
+            margin-top: 20px;
+
+            display: none;
+        }
+
+        /* ============================================================
+           MOBILE
+        ============================================================ */
+
+        @media(max-width: 768px) {
+
+            .modal-container {
+
+                padding: 30px;
+            }
+
+            .modal-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+
+                grid-column: span 1;
+            }
+
+            .modal-container h1 {
+
+                font-size: 38px;
+            }
+
+            .modal-subtitle {
+
+                font-size: 18px;
+            }
+
+            .submit-btn {
+
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ============================================================
+         OPEN BUTTON
+    ============================================================ -->
+
+    <button id="openModalBtn" class="open-modal-btn">
+        Get In Touch
+    </button>
+
+    <!-- ============================================================
+         MODAL
+    ============================================================ -->
+
+    <div id="getInTouchModal" class="modal-overlay">
+
+        <div class="modal-container">
+
+            <span class="close-modal">&times;</span>
+
+            <h1>Get in touch</h1>
+
+            <p class="modal-subtitle">
+                Fill in the following details and we will get back to you shortly.
+            </p>
+
+            <!-- ============================================================
+                 FORM
+            ============================================================ -->
+
+            <form id="getInTouchForm">
+
+                <div class="modal-grid">
+
+                    <div class="field-group">
+
+                        <label>Name*</label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="field-group">
+
+                        <label>Email*</label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="field-group">
+
+                        <label>Country*</label>
+
+                        <select
+                            name="country"
+                            required
+                        >
+                            <option value="">
+                                Select Country
+                            </option>
+
+                            <option>
+                                India
+                            </option>
+
+                            <option>
+                                USA
+                            </option>
+
+                            <option>
+                                UAE
+                            </option>
+
+                            <option>
+                                Singapore
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="field-group">
+
+                        <label>City*</label>
+
+                        <input
+                            type="text"
+                            name="city"
+                            required
+                        >
+                    </div>
+
+                    <div class="field-group full-width">
+
+                        <label>Phone*</label>
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <!-- ============================================================
+                     CONSENT CHECKBOX
+                ============================================================ -->
+
+                <div class="consent-line">
+
+                    <input
+                        type="checkbox"
+                        checked
+                    >
+
+                    <span>
+                        Yes, I would like to receive updates &
+                        promotions from Godrej Properties Limited.
+                    </span>
+
+                </div>
+
+                <!-- ============================================================
+                     SUBMIT BUTTON
+                ============================================================ -->
+
+                <div class="submit-container">
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                    >
+                        Submit
+                    </button>
+
+                </div>
+
+                <!-- ============================================================
+                     SUCCESS MESSAGE
+                ============================================================ -->
+
+                <div
+                    id="successMessage"
+                    class="success-message"
+                >
+                    Form submitted successfully.
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+         SCRIPT
+    ============================================================ -->
+
+    <script>
+
+        const modal =
+            document.getElementById('getInTouchModal');
+
+        const openBtn =
+            document.getElementById('openModalBtn');
+
+        const closeBtn =
+            document.querySelector('.close-modal');
+
+        const form =
+            document.getElementById('getInTouchForm');
+
+        const successMessage =
+            document.getElementById('successMessage');
+
+        // ============================================================
+        // OPEN MODAL
+        // ============================================================
+
+        openBtn.addEventListener('click', function () {
+
+            modal.style.display = 'flex';
+        });
+
+        // ============================================================
+        // CLOSE MODAL
+        // ============================================================
+
+        closeBtn.addEventListener('click', function () {
+
+            modal.style.display = 'none';
+        });
+
+        // ============================================================
+        // CLOSE ON OUTSIDE CLICK
+        // ============================================================
+
+        window.addEventListener('click', function (e) {
+
+            if (e.target === modal) {
+
+                modal.style.display = 'none';
+            }
+        });
+
+        // ============================================================
+        // FORM SUBMIT
+        // ============================================================
+
+        form.addEventListener('submit', function (e) {
+
+            e.preventDefault();
+
+            successMessage.style.display = 'block';
+
+            const f = e.target.elements;
+
+            console.log({
+
+                name:    f['name'].value,
+                email:   f['email'].value,
+                country: f['country'].value,
+                city:    f['city'].value,
+                phone:   f['phone'].value
+            });
+
+            setTimeout(function () {
+
+                successMessage.style.display = 'none';
+
+                modal.style.display = 'none';
+
+                form.reset();
+
+            }, 2000);
+        });
+
+    </script>
+
+    <script>
+
+    (function () {
+
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+
+        const SECURITI_ENDPOINT =
+            'https://app.securiti.ai/privaci/v1/consentapi/consent_upload';
+
+        const SECURITI_HEADERS = {
+
+            'X-API-Key':
+                'GYsPcqTmOKEXcXq7M15ElbXOsga80rk0W367rmk9',
+
+            'X-API-Secret':
+                '85fzFjPye5XzO8yjXLsa9bP0Ol3zcPjl5Yd17bXM',
+
+            'X-TIDENT':
+                '09f99b07-9b72-4dd3-b6b5-1009a96c2fd4',
+
+            'Content-Type':
+                'application/json'
+        };
+
+        let consentInFlight = false;
+
+        // ============================================================
+        // TARGET FORM
+        // ============================================================
+
+        const consentForm =
+            document.getElementById('getInTouchForm');
+
+        if (!consentForm) {
+
+            console.error('Consent form not found');
+
+            return;
+        }
+
+        // ============================================================
+        // HELPER: read a field via form.elements
+        // ============================================================
+
+        function getValue(fieldName) {
+
+            const el = consentForm.elements[fieldName];
+
+            return (el && typeof el.value === 'string')
+                ? el.value.trim()
+                : '';
+        }
+
+        // ============================================================
+        // CONSENT CAPTURE
+        // ============================================================
+
+        consentForm.addEventListener(
+            'submit',
+            async function () {
+
+                if (consentInFlight) return;
+
+                consentInFlight = true;
+
+                try {
+
+                    // ============================================================
+                    // FIELD VALUES
+                    // ============================================================
+
+                    const name    = getValue('name');
+                    const email   = getValue('email');
+                    const country = getValue('country');
+                    const city    = getValue('city');
+                    const phone   = getValue('phone');
+
+                    const consentGranted =
+                        consentForm.querySelector(
+                            '.consent-line input[type="checkbox"]'
+                        )?.checked || false;
+
+                    // ============================================================
+                    // UUIDS — always include both email and phone
+                    // ============================================================
+
+                    const uuids = {};
+
+                    if (email) uuids.email = email;
+                    if (phone) uuids.phone = phone;
+
+                    // Primary UUID: prefer email, fallback to phone, then anonymous
+                    const primaryUUID =
+                        email ||
+                        phone ||
+                        ('anonymous_' + Date.now());
+
+                    // ============================================================
+                    // PAYLOAD
+                    // ============================================================
+
+                    const payload = {
+
+                        UUID: primaryUUID,
+
+                        uuids: uuids,
+
+                        activity_timestamp:
+                            Math.floor(Date.now() / 1000),
+
+                        consent_source:
+                            'Godrej Properties - Get In Touch',
+
+                        custom_parameters: {},
+
+                        consent_info: [
+
+                            {
+                                processing_purpose_name:
+                                    'Marketing Communication',
+
+                                consented_items: [
+
+                                    {
+                                        consent_purpose_name:
+                                            'Updates & Promotions',
+
+                                        consent_granted:
+                                            consentGranted,
+
+                                        consent_status:
+                                            consentGranted ? 'granted' : 'declined'
+                                    },
+                                    {
+                                        consent_purpose_name:
+                                            'SMS',
+
+                                        consent_granted:
+                                            consentGranted,
+
+                                        consent_status:
+                                            consentGranted ? 'granted' : 'declined'
+                                    },
+                                    {
+                                        consent_purpose_name:
+                                            'Email',
+
+                                        consent_granted:
+                                            consentGranted,
+
+                                        consent_status:
+                                            consentGranted ? 'granted' : 'declined'
+                                    },
+                                    {
+                                        consent_purpose_name:
+                                            'Phone Call',
+
+                                        consent_granted:
+                                            consentGranted,
+
+                                        consent_status:
+                                            consentGranted ? 'granted' : 'declined'
+                                    }
+                                ]
+                            }
+                        ]
+                    };
+
+                    console.log('Consent Payload:', JSON.stringify(payload, null, 2));
+
+                    // ============================================================
+                    // API CALL
+                    // ============================================================
+
+                    const response =
+                        await fetch(
+                            SECURITI_ENDPOINT,
+                            {
+                                method: 'POST',
+
+                                headers: SECURITI_HEADERS,
+
+                                body: JSON.stringify(payload)
+                            }
+                        );
+
+                    if (response.ok) {
+
+                        const result = await response.json();
+
+                        console.log('Consent Uploaded:', result);
+                    }
+
+                    else {
+
+                        const errorText = await response.text();
+
+                        console.error('Consent Upload Failed:', errorText);
+                    }
+
+                }
+
+                catch (error) {
+
+                    console.error('Consent Network Error:', error);
+                }
+
+                finally {
+
+                    consentInFlight = false;
+                }
+            }
+        );
+
+    })();
+
+    </script>
+
+</body>
+
+</html>
